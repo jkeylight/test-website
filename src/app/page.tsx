@@ -241,11 +241,88 @@ export default function HomePage() {
       <PhilosophySection />
       <ServicesListSection />
       <StatsSection />
+      <D01Section />
       <ShowcaseSection />
       <ClientDuoSection />
       <ServicePickerSection />
       <CtaSection />
     </div>
+  )
+}
+
+// ── D01 SHOWCASE SECTION ─────────────────────────────────────────────────────
+function D01Section() {
+  const cardRef   = useRef<HTMLDivElement | null>(null)
+  const iframeRef = useRef<HTMLIFrameElement | null>(null)
+  const [hovered, setHovered] = useState(false)
+  const [loaded,  setLoaded]  = useState(false)
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+    const card = cardRef.current
+    if (!card) return
+    gsap.fromTo(card,
+      { opacity: 0, y: 60, scale: 0.97 },
+      { opacity: 1, y: 0, scale: 1, duration: 1.1, ease: 'power3.out',
+        scrollTrigger: { trigger: card, start: 'top 85%' } }
+    )
+  }, [])
+
+  const onEnter = () => {
+    setHovered(true)
+    if (iframeRef.current) gsap.to(iframeRef.current, { scale: 1.03, duration: 0.8, ease: 'power2.out' })
+  }
+  const onLeave = () => {
+    setHovered(false)
+    if (iframeRef.current) gsap.to(iframeRef.current, { scale: 1, duration: 0.6, ease: 'power2.out' })
+  }
+
+  return (
+    <section className={styles.d01Section}>
+      <div className={styles.d01SectionTop}>
+        <p className="eyebrow">2726 Featured client</p>
+        <span style={{ fontSize: '11px', letterSpacing: '0.1em', color: 'var(--muted)' }}>D01</span>
+      </div>
+      <div ref={cardRef} className={styles.d01Card} onMouseEnter={onEnter} onMouseLeave={onLeave}>
+        <div className={styles.d01IframeWrap}>
+          {!loaded && <div className={styles.d01Shimmer} />}
+          <iframe
+            ref={iframeRef}
+            src="/pb-official.html"
+            className={styles.d01Iframe}
+            title="Paul Brunton Foundation"
+            loading="lazy"
+            onLoad={() => setLoaded(true)}
+            tabIndex={-1}
+          />
+          <div className={styles.d01Overlay} />
+          <div className={styles.d01Glow} />
+          <div className={styles.d01Chrome}>
+            <div className={styles.d01Dots}>
+              <span style={{ background: '#ff5f57' }} />
+              <span style={{ background: '#febc2e' }} />
+              <span style={{ background: '#28c840' }} />
+            </div>
+            <div className={styles.d01Url}>paulbruntonfoundation.org</div>
+            <div className={styles.d01Visit}>{hovered ? 'Preview 2197' : ''}</div>
+          </div>
+        </div>
+        <div className={styles.d01Info}>
+          <div className={styles.d01InfoLeft}>
+            <div className={styles.d01Tags}>
+              <span className={styles.d01Tag}>Brand Identity</span>
+              <span className={styles.d01Tag}>Web Design</span>
+            </div>
+            <h3 className={styles.d01Title}>Paul Brunton Foundation</h3>
+            <p className={styles.d01Label}>Philosophy 00b7 Heritage 00b7 India</p>
+          </div>
+          <div className={styles.d01InfoRight}>
+            <span className={styles.d01Year}>2025</span>
+            <span className={styles.d01Arrow}>{hovered ? '2197' : '2192'}</span>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
 

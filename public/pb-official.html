@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Paul Brunton Foundation · India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   DESIGN TOKENS — RED × BLACK × GOLD
+═══════════════════════════════════════ */
+:root{
+  --red:       #B8001F;
+  --red-b:     #8B0015;
+  --red-l:     #D4102E;
+  --black:     #080808;
+  --black-2:   #101010;
+  --black-3:   #181818;
+  --black-4:   #242424;
+  --white:     #FFFFFF;
+  --off:       #F5F0EB;
+  --warm:      #EDE8E2;
+  --gold:      #B8902A;
+  --gold-l:    #D4AA4A;
+  --gold-d:    #8A6A18;
+  --mist:      #C8C0B4;
+  --smoke:     #6A635C;
+  --ff-serif:  'Cormorant', Georgia, serif;
+  --ff-sans:   'Montserrat', sans-serif;
+  --ff-body:   'EB Garamond', Georgia, serif;
+  --ease:      cubic-bezier(.16,1,.3,1);
+  --spring:    cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--off);font-family:var(--ff-body);font-size:clamp(1rem,1.1vw,1.1rem);line-height:1.78;overflow-x:hidden;cursor:none;}
+::selection{background:var(--red);color:var(--white);}
+::-webkit-scrollbar{width:2px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--red);}
+a{text-decoration:none;color:inherit;}
+
+/* grain overlay */
+body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
+  background-size:160px;opacity:.5;}
+
+/* ═══════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════ */
+#cd,#cr{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%);}
+#cd{width:7px;height:7px;background:var(--red);}
+#cr{width:30px;height:30px;border:1px solid rgba(184,0,31,.6);transition:transform .1s,width .3s,height .3s,opacity .3s;}
+
+/* ═══════════════════════════════════════
+   PAGE SYSTEM
+═══════════════════════════════════════ */
+.page{display:none;min-height:100vh;flex-direction:column;}
+.page.active{display:flex;}
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:clamp(1rem,2vw,1.4rem) clamp(1.5rem,5vw,4rem);
+  transition:all .5s var(--ease);
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(8,8,8,.96);backdrop-filter:blur(20px);border-bottom-color:rgba(184,0,31,.15);}
+.nav-left{display:flex;align-items:center;gap:1rem;}
+.nav-logo{display:flex;flex-direction:column;cursor:none;}
+.nav-logo-mark{display:flex;align-items:center;gap:.6rem;}
+.logo-emblem{width:32px;height:32px;border:1.5px solid var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--ff-serif);font-size:1rem;font-weight:600;color:var(--red);flex-shrink:0;}
+.logo-name{font-family:var(--ff-sans);font-size:clamp(.58rem,.85vw,.72rem);font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--white);line-height:1.2;}
+.logo-sub{font-family:var(--ff-sans);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:.1rem;}
+.nav-links{display:flex;gap:clamp(1rem,2vw,1.8rem);list-style:none;}
+.nav-links a{font-family:var(--ff-sans);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);transition:color .3s;position:relative;padding-bottom:2px;}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--red);transition:width .4s var(--ease);}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.lang-toggle{font-family:var(--ff-sans);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(184,0,31,.4);padding:.3rem .7rem;cursor:none;transition:all .3s;display:flex;gap:.4rem;align-items:center;}
+.lang-toggle:hover{border-color:var(--red);}
+.lt-en,.lt-pt{transition:color .3s;}
+.nav-cta{font-family:var(--ff-sans);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;background:var(--red);color:var(--white);padding:.5rem 1.2rem;cursor:none;transition:background .3s;}
+.nav-cta:hover{background:var(--red-l);}
+
+/* ═══════════════════════════════════════
+   SHARED LAYOUT
+═══════════════════════════════════════ */
+.wrap{max-width:1440px;margin:0 auto;padding:0 clamp(1.5rem,5vw,5rem);}
+.section{padding:clamp(5rem,10vw,10rem) 0;}
+.section-sm{padding:clamp(3rem,6vw,6rem) 0;}
+.eyebrow{font-family:var(--ff-sans);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem;}
+.eyebrow::before{content:'';width:2rem;height:1px;background:var(--red);}
+.display{font-family:var(--ff-serif);font-size:clamp(3rem,6vw,7rem);font-weight:300;line-height:.92;letter-spacing:-.02em;color:var(--white);}
+.display em{font-style:italic;color:var(--red);}
+.display strong{font-weight:600;}
+.h2{font-family:var(--ff-serif);font-size:clamp(2rem,3.5vw,4rem);font-weight:400;line-height:1.05;color:var(--white);}
+.h2 em{font-style:italic;color:var(--red);}
+.h3{font-family:var(--ff-serif);font-size:clamp(1.2rem,1.8vw,1.6rem);font-weight:500;color:var(--white);line-height:1.2;}
+.body-lg{font-family:var(--ff-body);font-size:clamp(1.05rem,1.3vw,1.2rem);color:var(--mist);line-height:1.8;}
+.body-sm{font-family:var(--ff-body);font-size:clamp(.9rem,1vw,1rem);color:var(--smoke);line-height:1.7;}
+.gold-line{width:3rem;height:2px;background:var(--gold);}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
+.rv.on{opacity:1;transform:none;}
+
+/* RED DIVIDER */
+.red-rule{width:100%;height:1px;background:linear-gradient(to right,var(--red),transparent);}
+.section-rule{border:none;height:1px;background:rgba(255,255,255,.06);margin:0;}
+
+/* ═══════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════ */
+.btn-primary{font-family:var(--ff-sans);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;background:var(--red);color:var(--white);padding:.9rem 2rem;border:none;cursor:none;display:inline-block;transition:all .3s;position:relative;overflow:hidden;}
+.btn-primary::after{content:'';position:absolute;inset:0;background:var(--white);opacity:0;transition:opacity .3s;}
+.btn-primary:hover{background:var(--red-l);}
+.btn-outline{font-family:var(--ff-sans);font-size:.62rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;background:transparent;color:var(--white);padding:.9rem 2rem;border:1px solid rgba(255,255,255,.2);cursor:none;display:inline-block;transition:all .3s;}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,.05);}
+.btn-gold{font-family:var(--ff-sans);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;background:transparent;color:var(--gold);padding:.9rem 2rem;border:1px solid var(--gold-d);cursor:none;display:inline-block;transition:all .3s;}
+.btn-gold:hover{background:var(--gold);color:var(--black);}
+
+/* ═══════════════════════════════════════
+   CARDS
+═══════════════════════════════════════ */
+.card{background:var(--black-3);border:1px solid rgba(255,255,255,.06);transition:border-color .4s,transform .4s var(--spring);cursor:none;}
+.card:hover{border-color:rgba(184,0,31,.4);transform:translateY(-4px);}
+.card-red{border-left:3px solid var(--red);}
+.card-gold{border-left:3px solid var(--gold);}
+
+/* ═══════════════════════════════════════
+   ██ PAGE 1 — HOME
+═══════════════════════════════════════ */
+
+/* HERO */
+#hero{
+  min-height:100svh;display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;align-items:center;
+  padding-top:80px;
+}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(184,0,31,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(184,0,31,.04) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-bg-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,transparent 30%,var(--black) 80%);}
+.hero-bg-accent{position:absolute;top:0;right:0;width:50%;height:100%;background:linear-gradient(135deg,var(--black-2) 0%,var(--black-3) 100%);border-left:1px solid rgba(255,255,255,.04);}
+.hero-left{position:relative;z-index:2;padding:clamp(2rem,6vw,6rem);}
+.hero-eyebrow{font-family:var(--ff-sans);font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:.8rem;margin-bottom:2rem;opacity:0;animation:fadeUp .8s .3s var(--ease) forwards;}
+.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--red);}
+.hero-title{font-family:var(--ff-serif);font-size:clamp(3.5rem,6.5vw,7.5rem);font-weight:300;line-height:.9;letter-spacing:-.025em;color:var(--white);margin-bottom:1.2rem;}
+.hero-title .tl{display:block;overflow:hidden;}
+.hero-title .tl span{display:block;opacity:0;transform:translateY(105%);animation:slideUp .9s var(--ease) forwards;}
+.hero-title .tl:nth-child(1) span{animation-delay:.4s;}
+.hero-title .tl:nth-child(2) span{animation-delay:.56s;font-style:italic;color:var(--red);}
+.hero-title .tl:nth-child(3) span{animation-delay:.72s;font-weight:600;}
+.hero-title .tl:nth-child(4) span{animation-delay:.88s;font-size:.55em;color:var(--gold);letter-spacing:.05em;font-style:normal;font-weight:400;}
+.hero-desc{font-family:var(--ff-body);font-size:clamp(1rem,1.3vw,1.15rem);color:var(--mist);max-width:480px;line-height:1.8;margin-bottom:2.5rem;opacity:0;animation:fadeUp .8s 1.1s var(--ease) forwards;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s 1.3s var(--ease) forwards;}
+.hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:clamp(2rem,4vw,4rem);}
+.hero-visual{width:100%;max-width:520px;position:relative;}
+.hero-quote-block{border-left:3px solid var(--red);padding:2.5rem 3rem;background:var(--black-2);position:relative;opacity:0;animation:fadeIn 1.2s 1s var(--ease) forwards;}
+.hero-quote-block::before{content:'"';font-family:var(--ff-serif);font-size:8rem;color:var(--red);opacity:.12;position:absolute;top:-1.5rem;left:1rem;line-height:1;}
+.hero-quote-text{font-family:var(--ff-serif);font-size:clamp(1.2rem,1.6vw,1.5rem);font-style:italic;font-weight:300;color:var(--off);line-height:1.65;margin-bottom:1.5rem;}
+.hero-quote-attr{font-family:var(--ff-sans);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:0;border-top:1px solid rgba(255,255,255,.06);}
+.hstat{padding:1.5rem;border-right:1px solid rgba(255,255,255,.06);}
+.hstat:last-child{border-right:none;}
+.hstat-n{font-family:var(--ff-serif);font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:600;color:var(--white);line-height:1;}
+.hstat-n span{color:var(--red);}
+.hstat-l{font-family:var(--ff-sans);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--smoke);margin-top:.3rem;}
+.hero-scroll{position:absolute;bottom:2.5rem;left:clamp(1.5rem,5vw,5rem);z-index:10;display:flex;align-items:center;gap:1rem;opacity:0;animation:fadeIn 1s 2s forwards;}
+.scroll-line{width:40px;height:1px;background:linear-gradient(to right,var(--red),transparent);}
+.scroll-txt{font-family:var(--ff-sans);font-size:.52rem;letter-spacing:.25em;text-transform:uppercase;color:var(--smoke);}
+
+/* MARQUEE */
+.marquee-band{background:var(--red);padding:.7rem 0;overflow:hidden;display:flex;border-top:1px solid var(--red-b);border-bottom:1px solid var(--red-b);}
+.mq-track{display:flex;white-space:nowrap;animation:marquee 30s linear infinite;}
+.mq-item{font-family:var(--ff-sans);font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.9);padding:0 2.5rem;display:inline-flex;align-items:center;gap:1rem;}
+.mq-item::after{content:'◆';font-size:.4rem;color:rgba(255,255,255,.4);}
+
+/* MISSION STRIP */
+#mission{background:var(--black-2);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);}
+.mission-grid{display:grid;grid-template-columns:1fr 2px 1.5fr;gap:0;align-items:center;}
+.mission-label-col{padding:clamp(3rem,5vw,5rem) clamp(2rem,4vw,4rem);}
+.mission-divider{background:rgba(255,255,255,.06);height:100%;}
+.mission-text-col{padding:clamp(3rem,5vw,5rem) clamp(2rem,4vw,4rem) clamp(3rem,5vw,5rem) clamp(3rem,5vw,5rem);}
+.mission-quote{font-family:var(--ff-serif);font-size:clamp(1.3rem,2vw,1.9rem);font-weight:300;font-style:italic;color:var(--off);line-height:1.6;}
+.mission-quote strong{font-style:normal;font-weight:600;color:var(--white);}
+
+/* WHY INDIA — 8 cards */
+#why{background:var(--black);}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);margin-top:4rem;}
+.why-card{background:var(--black);padding:clamp(1.8rem,3vw,2.8rem);position:relative;overflow:hidden;transition:background .4s;cursor:none;}
+.why-card::before{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:var(--red);transition:width .5s var(--ease);}
+.why-card:hover{background:var(--black-3);}
+.why-card:hover::before{width:100%;}
+.why-num{font-family:var(--ff-serif);font-size:3.5rem;font-weight:700;color:rgba(184,0,31,.12);line-height:1;margin-bottom:1rem;transition:color .4s;}
+.why-card:hover .why-num{color:rgba(184,0,31,.25);}
+.why-card h3{font-family:var(--ff-sans);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--white);margin-bottom:.8rem;}
+.why-card p{font-family:var(--ff-body);font-size:clamp(.88rem,1vw,.98rem);color:var(--smoke);line-height:1.65;}
+
+/* PROJECTS — 6 cards */
+#projects-home{background:var(--black-2);}
+.proj-intro{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,6rem);align-items:end;margin-bottom:4rem;}
+.proj-count{text-align:right;}
+.proj-count .big{font-family:var(--ff-serif);font-size:clamp(5rem,10vw,10rem);font-weight:700;line-height:.85;color:rgba(184,0,31,.15);display:block;}
+.proj-count .lbl{font-family:var(--ff-sans);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.proj-card{background:var(--black-3);border:1px solid rgba(255,255,255,.06);padding:clamp(1.8rem,3vw,2.5rem);position:relative;overflow:hidden;transition:all .4s var(--spring);cursor:none;}
+.proj-card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);}
+.proj-card:hover{transform:translateY(-5px);border-color:rgba(184,0,31,.3);box-shadow:0 30px 60px rgba(0,0,0,.4);}
+.proj-card:hover::after{transform:scaleX(1);}
+.proj-icon{font-size:2rem;display:block;margin-bottom:1.2rem;}
+.proj-tag{font-family:var(--ff-sans);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);border:1px solid rgba(184,0,31,.3);padding:.22rem .6rem;display:inline-block;margin-bottom:1rem;}
+.proj-card h3{font-family:var(--ff-serif);font-size:clamp(1rem,1.2vw,1.15rem);font-weight:500;color:var(--white);margin-bottom:.7rem;line-height:1.3;}
+.proj-card p{font-family:var(--ff-body);font-size:.92rem;color:var(--smoke);line-height:1.65;}
+
+/* MARKET — 10 boxes */
+#market-home{background:var(--black-3);}
+.market-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.05);margin-top:4rem;}
+.mcard{background:var(--black-3);padding:clamp(1.5rem,2.5vw,2.2rem);position:relative;transition:background .3s;cursor:none;}
+.mcard::before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(to right,var(--red),transparent);}
+.mcard:hover{background:var(--black-4);}
+.mval{font-family:var(--ff-serif);font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:600;color:var(--gold-l);line-height:1;margin-bottom:.5rem;}
+.mdesc{font-family:var(--ff-sans);font-size:.58rem;letter-spacing:.05em;color:var(--smoke);line-height:1.5;}
+
+/* ROADMAP */
+#roadmap-home{background:var(--black);}
+.road-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem;}
+.phase{border:1px solid rgba(255,255,255,.07);padding:clamp(2rem,3vw,3rem);position:relative;background:var(--black-2);transition:border-color .4s;}
+.phase:hover{border-color:rgba(184,0,31,.3);}
+.phase-num{font-family:var(--ff-serif);font-size:5rem;font-weight:700;color:rgba(255,255,255,.03);line-height:1;position:absolute;top:1rem;right:1.5rem;}
+.phase-badge{font-family:var(--ff-sans);font-size:.52rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--white);display:inline-block;padding:.32rem .85rem;margin-bottom:1.5rem;}
+.phase:nth-child(1) .phase-badge{background:var(--red);}
+.phase:nth-child(2) .phase-badge{background:var(--black-4);border:1px solid var(--gold-d);color:var(--gold);}
+.phase:nth-child(3) .phase-badge{background:var(--black-4);border:1px solid rgba(255,255,255,.15);}
+.phase h3{font-family:var(--ff-serif);font-size:1.2rem;font-weight:500;color:var(--white);margin-bottom:1.5rem;}
+.phase ul{list-style:none;}
+.phase li{font-family:var(--ff-body);font-size:.95rem;color:var(--smoke);padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;gap:.7rem;align-items:baseline;}
+.phase li::before{content:'—';color:var(--red);font-size:.7rem;flex-shrink:0;}
+
+/* GOVERNANCE */
+#gov-home{background:var(--black-2);border-top:1px solid rgba(255,255,255,.05);}
+.gov-wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(4rem,8vw,8rem);align-items:center;}
+.gov-diagram{display:flex;flex-direction:column;align-items:center;gap:0;}
+.gov-box{width:100%;max-width:420px;padding:1.5rem 2rem;text-align:center;}
+.gov-top{background:var(--red);border-bottom:3px solid var(--red-b);}
+.gov-top h3{font-family:var(--ff-sans);font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--white);}
+.gov-top p{font-family:var(--ff-body);font-size:.9rem;color:rgba(255,255,255,.75);margin-top:.3rem;}
+.gov-arrow{width:1px;height:40px;background:var(--gold);position:relative;}
+.gov-arrow::after{content:'';position:absolute;bottom:0;left:-4px;border-left:4px solid transparent;border-right:4px solid transparent;border-top:8px solid var(--gold);}
+.gov-bot{background:var(--black-3);border:1px solid var(--gold-d);}
+.gov-bot h3{font-family:var(--ff-sans);font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+.gov-bot p{font-family:var(--ff-body);font-size:.9rem;color:var(--mist);margin-top:.3rem;}
+.gov-roles{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;width:100%;max-width:420px;}
+.gov-role{padding:1rem 1.2rem;background:var(--black-4);border-top:2px solid var(--red);}
+.gov-role h4{font-family:var(--ff-sans);font-size:.55rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem;}
+.gov-role p{font-family:var(--ff-body);font-size:.85rem;color:var(--smoke);}
+.gov-text{}
+.gov-text .h2{margin-bottom:1.5rem;}
+.gov-text p{font-family:var(--ff-body);font-size:clamp(1rem,1.2vw,1.1rem);color:var(--mist);line-height:1.8;margin-bottom:1rem;}
+
+/* HOME CTA */
+#home-cta{background:var(--red);position:relative;overflow:hidden;}
+#home-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--red-b),var(--red));}
+#home-cta::after{content:'OM';font-family:var(--ff-serif);font-size:clamp(15rem,25vw,30rem);font-weight:700;color:rgba(0,0,0,.08);position:absolute;right:-2rem;top:50%;transform:translateY(-50%);letter-spacing:-.05em;pointer-events:none;}
+.home-cta-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(3rem,6vw,6rem);align-items:center;padding:clamp(5rem,10vw,10rem) 0;}
+.home-cta-text .display{color:var(--white);}
+.home-cta-text p{font-family:var(--ff-body);font-size:clamp(1rem,1.3vw,1.2rem);color:rgba(255,255,255,.8);line-height:1.8;margin:1.5rem 0 2.5rem;}
+.home-cta-aside{text-align:right;}
+.home-cta-aside blockquote{font-family:var(--ff-serif);font-size:clamp(1.1rem,1.5vw,1.35rem);font-style:italic;color:rgba(255,255,255,.85);line-height:1.65;border-right:3px solid rgba(255,255,255,.3);padding-right:2rem;margin-bottom:1rem;}
+.home-cta-aside cite{font-family:var(--ff-sans);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+
+/* ═══════════════════════════════════════
+   ██ PAGE 2 — ABOUT PAUL BRUNTON
+═══════════════════════════════════════ */
+#page-about{background:var(--black);}
+.about-hero{min-height:60vh;display:flex;align-items:flex-end;padding-top:120px;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06);}
+.about-hero-bg{position:absolute;inset:0;background:linear-gradient(to bottom right,var(--black-3),var(--black));z-index:0;}
+.about-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(184,0,31,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(184,0,31,.03) 1px,transparent 1px);background-size:50px 50px;z-index:1;}
+.about-hero-content{position:relative;z-index:2;padding-bottom:clamp(4rem,8vw,8rem);}
+.about-hero-content .display{max-width:800px;}
+.about-split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(4rem,8vw,8rem);align-items:start;}
+.about-photo{position:relative;}
+.about-photo-frame{aspect-ratio:3/4;background:linear-gradient(160deg,var(--black-3),var(--black-4));border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:6rem;color:rgba(255,255,255,.08);position:relative;overflow:hidden;}
+.about-photo-frame::before{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,var(--black),transparent);}
+.about-photo-caption{position:absolute;bottom:-1px;left:0;right:0;background:var(--red);padding:.8rem 1.2rem;text-align:center;}
+.about-photo-caption p{font-family:var(--ff-sans);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--white);}
+.about-sidebar{position:sticky;top:120px;}
+.about-sidebar blockquote{border-left:3px solid var(--red);padding:1.5rem 2rem;background:var(--black-2);margin-bottom:2rem;}
+.about-sidebar blockquote p{font-family:var(--ff-serif);font-size:clamp(1rem,1.3vw,1.2rem);font-style:italic;color:var(--off);line-height:1.7;margin-bottom:.75rem;}
+.about-sidebar blockquote cite{font-family:var(--ff-sans);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
+.about-text p{font-family:var(--ff-body);font-size:clamp(1rem,1.2vw,1.1rem);color:var(--mist);line-height:1.85;margin-bottom:1.4rem;}
+.about-text h3{font-family:var(--ff-serif);font-size:clamp(1.3rem,2vw,1.7rem);font-weight:500;color:var(--white);margin:2.5rem 0 1rem;}
+.timeline-list{list-style:none;margin-top:3rem;}
+.tl-item{display:grid;grid-template-columns:120px 1fr;gap:2rem;margin-bottom:2.5rem;position:relative;}
+.tl-item::before{content:'';position:absolute;left:119px;top:8px;bottom:-2.5rem;width:1px;background:rgba(255,255,255,.06);}
+.tl-item:last-child::before{display:none;}
+.tl-era{font-family:var(--ff-sans);font-size:.58rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--red);padding-top:.1rem;text-align:right;}
+.tl-dot{position:absolute;left:112px;top:5px;width:7px;height:7px;border-radius:50%;background:var(--red);}
+.tl-body h4{font-family:var(--ff-serif);font-size:1.05rem;font-weight:500;color:var(--white);margin-bottom:.4rem;}
+.tl-body p{font-family:var(--ff-body);font-size:.95rem;color:var(--smoke);line-height:1.65;}
+
+/* ═══════════════════════════════════════
+   ██ PAGE 3 — PROJECTS & WORK
+═══════════════════════════════════════ */
+#page-projects{background:var(--black);}
+.projects-hero{padding:clamp(8rem,15vw,14rem) 0 clamp(4rem,8vw,8rem);border-bottom:1px solid rgba(255,255,255,.06);}
+.projects-hero .display{max-width:700px;}
+.proj-full-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem;}
+.proj-full-card{background:var(--black-2);border:1px solid rgba(255,255,255,.06);overflow:hidden;transition:all .4s var(--spring);cursor:none;}
+.proj-full-card:hover{border-color:rgba(184,0,31,.35);transform:translateY(-5px);box-shadow:0 40px 80px rgba(0,0,0,.5);}
+.pfcard-top{padding:2.5rem 2.5rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.pfcard-icon{font-size:2.5rem;margin-bottom:1.2rem;display:block;}
+.pfcard-tag{font-family:var(--ff-sans);font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);border:1px solid rgba(184,0,31,.35);padding:.22rem .65rem;display:inline-block;margin-bottom:1rem;}
+.pfcard-title{font-family:var(--ff-serif);font-size:clamp(1.1rem,1.4vw,1.35rem);font-weight:500;color:var(--white);line-height:1.25;margin-bottom:.8rem;}
+.pfcard-bottom{padding:1.5rem 2.5rem;}
+.pfcard-bottom p{font-family:var(--ff-body);font-size:.95rem;color:var(--smoke);line-height:1.7;}
+.pfcard-status{display:flex;align-items:center;gap:.5rem;margin-top:1.2rem;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--red);}
+.status-dot.gold{background:var(--gold);}
+.status-dot.gray{background:var(--smoke);}
+.status-txt{font-family:var(--ff-sans);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--smoke);}
+
+/* ═══════════════════════════════════════
+   ██ PAGE 4 — BOOKS
+═══════════════════════════════════════ */
+#page-books{background:var(--black);}
+.books-hero{padding:clamp(8rem,15vw,14rem) 0 clamp(4rem,8vw,8rem);border-bottom:1px solid rgba(255,255,255,.06);}
+.books-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:4rem;}
+.book-card{cursor:none;transition:transform .4s var(--spring);}
+.book-card:hover{transform:translateY(-8px);}
+.book-cover{aspect-ratio:2/3;background:var(--black-3);border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;margin-bottom:1.2rem;padding:1.5rem;}
+.book-cover::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red);}
+.book-cover-inner{text-align:center;}
+.book-cover-inner .bi{font-size:2rem;display:block;margin-bottom:.8rem;}
+.book-cover-title{font-family:var(--ff-serif);font-size:clamp(.85rem,1.1vw,1rem);font-style:italic;color:var(--white);line-height:1.3;}
+.book-cover-year{font-family:var(--ff-sans);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-top:.5rem;}
+.book-info h3{font-family:var(--ff-serif);font-size:clamp(.9rem,1.1vw,1rem);font-weight:500;color:var(--white);line-height:1.3;margin-bottom:.4rem;}
+.book-info p{font-family:var(--ff-body);font-size:.88rem;color:var(--smoke);line-height:1.6;}
+
+/* NOTEBOOKS SPECIAL */
+.notebooks-block{background:var(--black-2);border:1px solid rgba(255,255,255,.07);padding:clamp(3rem,5vw,5rem);margin:5rem 0;display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,5vw,5rem);align-items:center;}
+.nb-visual{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;}
+.nb-vol{aspect-ratio:2/3;background:var(--black-3);border:1px solid rgba(255,255,255,.06);border-left:2px solid var(--red);display:flex;align-items:flex-end;padding:.5rem;}
+.nb-vol span{font-family:var(--ff-serif);font-size:.65rem;font-weight:600;color:rgba(255,255,255,.3);}
+
+/* ═══════════════════════════════════════
+   ██ PAGE 5 — CONTACT
+═══════════════════════════════════════ */
+#page-contact{background:var(--black);}
+.contact-hero{padding:clamp(8rem,15vw,14rem) 0 clamp(4rem,8vw,8rem);border-bottom:1px solid rgba(255,255,255,.06);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(4rem,8vw,8rem);margin-top:5rem;}
+.contact-info{}
+.contact-block{margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.contact-block:last-child{border-bottom:none;}
+.contact-block-label{font-family:var(--ff-sans);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem;}
+.contact-block h3{font-family:var(--ff-serif);font-size:clamp(1.1rem,1.5vw,1.35rem);font-weight:400;color:var(--white);margin-bottom:.5rem;}
+.contact-block p{font-family:var(--ff-body);font-size:1rem;color:var(--mist);}
+.contact-block a{color:var(--gold);text-decoration:none;transition:color .3s;}
+.contact-block a:hover{color:var(--gold-l);}
+.contact-form-side{}
+.form-group{margin-bottom:1.5rem;}
+.form-label{font-family:var(--ff-sans);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);display:block;margin-bottom:.5rem;}
+.form-input{width:100%;background:var(--black-2);border:1px solid rgba(255,255,255,.1);padding:.85rem 1.1rem;font-family:var(--ff-body);font-size:1rem;color:var(--off);outline:none;transition:border-color .3s;cursor:none;}
+.form-input:focus{border-color:var(--red);}
+.form-input::placeholder{color:var(--smoke);}
+textarea.form-input{min-height:150px;resize:vertical;}
+.form-select{appearance:none;-webkit-appearance:none;}
+
+/* FOOTER */
+footer{background:var(--black-2);border-top:1px solid rgba(255,255,255,.06);padding:clamp(3rem,5vw,5rem) 0 clamp(2rem,3vw,3rem);}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(2rem,4vw,4rem);margin-bottom:3rem;}
+.footer-brand{}
+.footer-logo-row{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;}
+.footer-emblem{width:36px;height:36px;border:1.5px solid var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--ff-serif);font-size:1.1rem;color:var(--red);}
+.footer-name{font-family:var(--ff-sans);font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--white);}
+.footer-tagline{font-family:var(--ff-body);font-size:.95rem;color:var(--smoke);line-height:1.65;max-width:260px;margin-bottom:1.5rem;}
+.footer-col h4{font-family:var(--ff-sans);font-size:.55rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;}
+.footer-col ul{list-style:none;}
+.footer-col li{margin-bottom:.6rem;}
+.footer-col a{font-family:var(--ff-body);font-size:.95rem;color:var(--smoke);transition:color .3s;cursor:none;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.06);}
+.footer-credit{font-family:var(--ff-body);font-style:italic;font-size:.95rem;color:var(--smoke);display:flex;align-items:center;gap:.5rem;}
+.heart{color:var(--red);animation:heartbeat 1.8s ease-in-out infinite;display:inline-block;font-style:normal;}
+.footer-legal{font-family:var(--ff-sans);font-size:.5rem;letter-spacing:.12em;color:rgba(255,255,255,.2);}
+
+/* ═══════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════ */
+@keyframes fadeUp{to{opacity:1;transform:none;}}
+@keyframes fadeIn{to{opacity:1;}}
+@keyframes slideUp{to{opacity:1;transform:none;}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes heartbeat{0%,100%{transform:scale(1);}15%{transform:scale(1.3);}30%{transform:scale(1);}45%{transform:scale(1.2);}60%{transform:scale(1);}}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1100px){
+  .why-grid{grid-template-columns:repeat(2,1fr);}
+  .proj-grid,.proj-full-grid{grid-template-columns:repeat(2,1fr);}
+  .market-grid{grid-template-columns:repeat(2,1fr);}
+  .road-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .books-grid{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:800px){
+  #hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .mission-grid{grid-template-columns:1fr;}
+  .mission-divider{display:none;}
+  .proj-intro{grid-template-columns:1fr;}
+  .about-split{grid-template-columns:1fr;}
+  .notebooks-block{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .gov-wrap{grid-template-columns:1fr;}
+  .home-cta-inner{grid-template-columns:1fr;}
+  .home-cta-aside{text-align:left;}
+  .nav-links{display:none;}
+  .books-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:520px){
+  .proj-grid,.proj-full-grid{grid-template-columns:1fr;}
+  .market-grid{grid-template-columns:1fr 1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .books-grid{grid-template-columns:1fr 1fr;}
+  .why-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cr"></div>
+<div id="cd"></div>
+
+<!-- ═══════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-left">
+    <a href="#" class="nav-logo" onclick="showPage('home');return false;">
+      <div class="nav-logo-mark">
+        <div class="logo-emblem">PB</div>
+        <div>
+          <div class="logo-name" data-en="Paul Brunton Foundation" data-pt="Fundação Paul Brunton">Paul Brunton Foundation</div>
+          <div class="logo-sub" data-en="India Chapter" data-pt="Capítulo Índia">India Chapter</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home');return false;" data-en="Home" data-pt="Início" data-page="home">Home</a></li>
+    <li><a href="#" onclick="showPage('about');return false;" data-en="About PB" data-pt="Sobre PB" data-page="about">About PB</a></li>
+    <li><a href="#" onclick="showPage('projects');return false;" data-en="Projects" data-pt="Projetos" data-page="projects">Projects</a></li>
+    <li><a href="#" onclick="showPage('books');return false;" data-en="Books" data-pt="Livros" data-page="books">Books</a></li>
+    <li><a href="#" onclick="showPage('contact');return false;" data-en="Contact" data-pt="Contato" data-page="contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-toggle" onclick="toggleLang()">
+      <span class="lt-en">EN</span><span style="color:rgba(255,255,255,.2)">|</span><span class="lt-pt">PT</span>
+    </button>
+    <a href="#" class="nav-cta" onclick="showPage('contact');return false;" data-en="Get Involved" data-pt="Participar">Get Involved</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     PAGE: HOME
+═══════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="hero-bg-grid"></div>
+      <div class="hero-bg-vignette"></div>
+      <div class="hero-bg-accent"></div>
+    </div>
+    <div class="hero-left wrap" style="grid-column:1;padding-left:clamp(1.5rem,5vw,5rem);">
+      <div class="hero-eyebrow" data-en="Official India Chapter · Est. 2025" data-pt="Capítulo Oficial Índia · Est. 2025">Official India Chapter · Est. 2025</div>
+      <h1 class="hero-title">
+        <span class="tl"><span data-en="Paul" data-pt="Paul">Paul</span></span>
+        <span class="tl"><span data-en="Brunton" data-pt="Brunton">Brunton</span></span>
+        <span class="tl"><span data-en="Foundation" data-pt="Fundação">Foundation</span></span>
+        <span class="tl"><span data-en="India" data-pt="Índia">India</span></span>
+      </h1>
+      <p class="hero-desc" data-en="Returning his philosophy to its sacred source. Serving India's spiritual seekers with PB's timeless, non-sectarian wisdom." data-pt="Devolvendo sua filosofia à sua fonte sagrada. Servindo os buscadores espirituais da Índia com a sabedoria atemporal e não-sectária de PB.">Returning his philosophy to its sacred source. Serving India's spiritual seekers with PB's timeless, non-sectarian wisdom.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-primary" onclick="showPage('about');return false;" data-en="Discover Our Mission" data-pt="Descobrir Nossa Missão">Discover Our Mission</a>
+        <a href="#" class="btn-outline" onclick="showPage('projects');return false;" data-en="View Our Work" data-pt="Ver Nosso Trabalho">View Our Work</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual">
+        <div class="hero-quote-block">
+          <p class="hero-quote-text" data-en="India is not a market for PB's work — it is where his awakening happened." data-pt="A Índia não é um mercado para o trabalho de PB — é onde seu despertar aconteceu.">"India is not a market for PB's work — it is where his awakening happened."</p>
+          <div class="hero-quote-attr" data-en="Our Founding Vision" data-pt="Nossa Visão Fundadora">Our Founding Vision</div>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat"><div class="hstat-n">28<span>+</span></div><div class="hstat-l" data-en="Books by PB" data-pt="Livros de PB">Books by PB</div></div>
+          <div class="hstat"><div class="hstat-n">$27<span>B</span></div><div class="hstat-l" data-en="India Wellness Market" data-pt="Mercado Bem-Estar Índia">India Wellness Market</div></div>
+          <div class="hstat"><div class="hstat-n">1.4<span>B</span></div><div class="hstat-l" data-en="Potential Seekers" data-pt="Buscadores Potenciais">Potential Seekers</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span class="scroll-txt" data-en="Scroll to explore" data-pt="Role para explorar">Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-band" aria-hidden="true">
+    <div class="mq-track" id="mq1">
+      <span class="mq-item" data-en="A Homecoming"            data-pt="Um Retorno ao Lar">A Homecoming</span>
+      <span class="mq-item" data-en="Bridging East &amp; West" data-pt="Unindo Oriente e Ocidente">Bridging East &amp; West</span>
+      <span class="mq-item" data-en="The Overself"             data-pt="O Eu Superior">The Overself</span>
+      <span class="mq-item" data-en="1.4 Billion Seekers"      data-pt="1,4 Bilhão de Buscadores">1.4 Billion Seekers</span>
+      <span class="mq-item" data-en="Arunachala"               data-pt="Arunachala">Arunachala</span>
+      <span class="mq-item" data-en="Ramana Maharshi"          data-pt="Ramana Maharshi">Ramana Maharshi</span>
+      <span class="mq-item" data-en="Philosophy of the Soul"   data-pt="Filosofia da Alma">Philosophy of the Soul</span>
+      <span class="mq-item" data-en="A Homecoming"             data-pt="Um Retorno ao Lar">A Homecoming</span>
+      <span class="mq-item" data-en="Bridging East &amp; West" data-pt="Unindo Oriente e Ocidente">Bridging East &amp; West</span>
+      <span class="mq-item" data-en="The Overself"             data-pt="O Eu Superior">The Overself</span>
+      <span class="mq-item" data-en="1.4 Billion Seekers"      data-pt="1,4 Bilhão de Buscadores">1.4 Billion Seekers</span>
+      <span class="mq-item" data-en="Arunachala"               data-pt="Arunachala">Arunachala</span>
+      <span class="mq-item" data-en="Ramana Maharshi"          data-pt="Ramana Maharshi">Ramana Maharshi</span>
+      <span class="mq-item" data-en="Philosophy of the Soul"   data-pt="Filosofia da Alma">Philosophy of the Soul</span>
+    </div>
+  </div>
+
+  <!-- MISSION STRIP -->
+  <section id="mission" class="section-sm">
+    <div class="wrap">
+      <div class="mission-grid">
+        <div class="mission-label-col rv">
+          <div class="eyebrow" data-en="Our Mission" data-pt="Nossa Missão">Our Mission</div>
+          <h2 class="h2"><em data-en="Bringing PB" data-pt="Trazendo PB">Bringing PB</em><br><span data-en="Home to India" data-pt="para a Índia">Home to India</span></h2>
+          <div class="gold-line" style="margin-top:1.5rem;"></div>
+        </div>
+        <div class="mission-divider"></div>
+        <div class="mission-text-col rv" style="transition-delay:.15s">
+          <p class="mission-quote" data-en='PB spent his life <strong>bridging East and West.</strong> Every major turning point in his philosophy happened on Indian soil. A Foundation in India is not an expansion — <strong>it is a homecoming.</strong>' data-pt='PB passou sua vida <strong>unindo Oriente e Ocidente.</strong> Cada grande ponto de virada em sua filosofia aconteceu em solo indiano. Uma Fundação na Índia não é uma expansão — <strong>é um retorno ao lar.</strong>'>PB spent his life <strong>bridging East and West.</strong> Every major turning point in his philosophy happened on Indian soil. A Foundation in India is not an expansion — <strong>it is a homecoming.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- WHY INDIA -->
+  <section id="why" class="section">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow" data-en="The Case" data-pt="O Argumento">The Case</div></div>
+      <h2 class="h2 rv" style="transition-delay:.1s"><span data-en="Why India" data-pt="Por que Índia">Why India</span> <em data-en="Now" data-pt="Agora">Now</em></h2>
+      <div class="why-grid" id="why-grid"></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS PREVIEW -->
+  <section id="projects-home" class="section">
+    <div class="wrap">
+      <div class="proj-intro">
+        <div>
+          <div class="rv"><div class="eyebrow" data-en="Already Working" data-pt="Já em Funcionamento">Already Working</div></div>
+          <h2 class="h2 rv" style="transition-delay:.1s"><span data-en="Six Major" data-pt="Seis Grandes">Six Major</span><br><em data-en="Projects Complete" data-pt="Projetos Concluídos">Projects Complete</em></h2>
+          <p class="body-lg rv" style="transition-delay:.2s;margin-top:1.2rem;" data-en="We haven't just talked about this. We have been quietly building the ecosystem a PB Foundation in India needs." data-pt="Não apenas falamos sobre isso. Construímos silenciosamente o ecossistema que uma Fundação PB na Índia precisa.">We haven't just talked about this. We have been quietly building the ecosystem a PB Foundation in India needs.</p>
+          <div class="rv" style="transition-delay:.3s;margin-top:2rem;">
+            <a href="#" class="btn-primary" onclick="showPage('projects');return false;" data-en="View All Projects" data-pt="Ver Todos os Projetos">View All Projects</a>
+          </div>
+        </div>
+        <div class="proj-count rv" style="transition-delay:.15s">
+          <span class="big">6</span>
+          <span class="lbl" data-en="Projects Ready" data-pt="Projetos Prontos">Projects Ready</span>
+        </div>
+      </div>
+      <div class="proj-grid" id="proj-home-grid"></div>
+    </div>
+  </section>
+
+  <!-- MARKET DATA -->
+  <section id="market-home" class="section">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow" data-en="The Numbers" data-pt="Os Números">The Numbers</div></div>
+      <h2 class="h2 rv" style="transition-delay:.1s"><span data-en="India Market" data-pt="Pesquisa de Mercado">India Market</span> <em data-en="Intelligence" data-pt="da Índia">Intelligence</em></h2>
+      <div class="market-grid" id="market-grid"></div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap-home" class="section">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow" data-en="The Plan" data-pt="O Plano">The Plan</div></div>
+      <h2 class="h2 rv" style="transition-delay:.1s"><span data-en="Year 1–2" data-pt="Roteiro">Year 1–2</span> <em data-en="Roadmap" data-pt="Anos 1–2">Roadmap</em></h2>
+      <div class="road-grid" id="road-grid"></div>
+    </div>
+  </section>
+
+  <!-- GOVERNANCE -->
+  <section id="gov-home" class="section">
+    <div class="wrap">
+      <div class="gov-wrap">
+        <div class="gov-text rv">
+          <div class="eyebrow" data-en="Structure" data-pt="Estrutura">Structure</div>
+          <h2 class="h2" style="margin-bottom:1.5rem;"><span data-en="Governance" data-pt="Governança">Governance</span> <em data-en="&amp; Alignment" data-pt="&amp; Alinhamento">&amp; Alignment</em></h2>
+          <p data-en="The PB Foundation India operates as an independent entity, formally affiliated with the Paul Brunton Philosophic Foundation in the USA. All teachings, values, and editorial standards remain unchanged." data-pt="A Fundação PB Índia opera como entidade independente, formalmente afiliada à Fundação Filosófica Paul Brunton nos EUA. Todos os ensinamentos, valores e padrões editoriais permanecem inalterados.">The PB Foundation India operates as an independent entity, formally affiliated with the Paul Brunton Philosophic Foundation in the USA. All teachings, values, and editorial standards remain unchanged.</p>
+          <p style="margin-top:1rem;" data-en="Registered as a Section 8 Company under Indian law, with full financial transparency and annual reporting to the US Foundation board." data-pt="Registrada como Empresa Seção 8 sob a lei indiana, com total transparência financeira e relatórios anuais para o conselho da Fundação dos EUA.">Registered as a Section 8 Company under Indian law, with full financial transparency and annual reporting to the US Foundation board.</p>
+          <div style="margin-top:2rem;"><a href="#" class="btn-gold" onclick="showPage('contact');return false;" data-en="Enquire About Partnership" data-pt="Consultar Parceria">Enquire About Partnership</a></div>
+        </div>
+        <div class="rv" style="transition-delay:.2s;display:flex;flex-direction:column;align-items:center;">
+          <div class="gov-diagram">
+            <div class="gov-box gov-top">
+              <h3 data-en="PB Foundation USA" data-pt="Fundação PB EUA">PB Foundation USA</h3>
+              <p data-en="Parent Body · Values &amp; Teachings Unchanged" data-pt="Organização Mãe · Valores &amp; Ensinamentos Inalterados">Parent Body · Values &amp; Teachings Unchanged</p>
+            </div>
+            <div class="gov-arrow"></div>
+            <div class="gov-box gov-bot">
+              <h3 data-en="PB Foundation India" data-pt="Fundação PB Índia">PB Foundation India</h3>
+              <p data-en="Independent · Formally Affiliated · Transparent" data-pt="Independente · Afiliada Formalmente · Transparente">Independent · Formally Affiliated · Transparent</p>
+            </div>
+          </div>
+          <div class="gov-roles" id="gov-roles"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOME CTA -->
+  <section id="home-cta">
+    <div class="wrap">
+      <div class="home-cta-inner">
+        <div class="home-cta-text rv">
+          <div class="eyebrow" style="color:rgba(255,255,255,.6);" data-en="Join Us" data-pt="Junte-se a Nós">Join Us</div>
+          <div class="display"><span data-en="Let Us Bring" data-pt="Vamos Trazer">Let Us Bring</span><br><em style="color:rgba(255,255,255,.8);" data-en="PB Home" data-pt="PB para Casa">PB Home</em></div>
+          <p data-en="We are ready to serve. We only ask for your blessing and support." data-pt="Estamos prontos para servir. Pedimos apenas sua bênção e apoio.">We are ready to serve. We only ask for your blessing and support.</p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="#" class="btn-outline" style="border-color:rgba(255,255,255,.4);color:var(--white);" onclick="showPage('contact');return false;" data-en="Get in Touch" data-pt="Entre em Contato">Get in Touch</a>
+            <a href="#" class="btn-outline" style="border-color:rgba(255,255,255,.4);color:var(--white);" onclick="showPage('about');return false;" data-en="Read the Story" data-pt="Leia a História">Read the Story</a>
+          </div>
+        </div>
+        <div class="home-cta-aside rv" style="transition-delay:.2s">
+          <blockquote data-en='"India is not just a market for Paul Brunton&apos;s work. It is where his awakening happened, where he met his Master, and where the seeds of everything he taught the world were first planted."' data-pt='"A Índia não é apenas um mercado para o trabalho de Paul Brunton. É onde seu despertar aconteceu, onde ele encontrou seu Mestre e onde as sementes de tudo que ele ensinou ao mundo foram plantadas pela primeira vez."'>"India is not just a market for Paul Brunton's work. It is where his awakening happened, where he met his Master, and where the seeds of everything he taught the world were first planted."</blockquote>
+          <cite data-en="— Founding Mission Document" data-pt="— Documento de Missão Fundadora">— Founding Mission Document</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER inside home page -->
+  <div id="footer-home"></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: ABOUT
+═══════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <section class="about-hero">
+    <div class="about-hero-bg"></div>
+    <div class="about-hero-grid"></div>
+    <div class="about-hero-content wrap">
+      <div class="eyebrow" data-en="The Man Behind the Mission" data-pt="O Homem Por Trás da Missão">The Man Behind the Mission</div>
+      <div class="display rv"><span data-en="Paul" data-pt="Paul">Paul</span><br><em data-en="Brunton" data-pt="Brunton">Brunton</em><br><strong data-en="1898 – 1981" data-pt="1898 – 1981">1898 – 1981</strong></div>
+      <p class="body-lg rv" style="max-width:600px;margin-top:1.5rem;transition-delay:.2s;" data-en="British philosopher, mystic, and author who introduced the Indian spiritual tradition — particularly Ramana Maharshi and Advaita Vedanta — to the modern Western world." data-pt="Filósofo, místico e autor britânico que apresentou a tradição espiritual indiana — particularmente Ramana Maharshi e o Advaita Vedanta — ao mundo ocidental moderno.">British philosopher, mystic, and author who introduced the Indian spiritual tradition — particularly Ramana Maharshi and Advaita Vedanta — to the modern Western world.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="about-split">
+        <div class="rv">
+          <div class="about-photo">
+            <div class="about-photo-frame">✦</div>
+            <div class="about-photo-caption"><p data-en="Paul Brunton · India, 1930s" data-pt="Paul Brunton · Índia, Anos 1930">Paul Brunton · India, 1930s</p></div>
+          </div>
+          <div class="about-sidebar" style="margin-top:2rem;">
+            <blockquote>
+              <p data-en='"The goal of philosophy is not merely to know truth but to live it, to embody it in every act of daily existence."' data-pt='"O objetivo da filosofia não é apenas conhecer a verdade, mas vivê-la, incorporá-la em cada ato da existência diária."'>"The goal of philosophy is not merely to know truth but to live it, to embody it in every act of daily existence."</p>
+              <cite>— Paul Brunton</cite>
+            </blockquote>
+            <blockquote>
+              <p data-en='"In the silence of deep meditation, the Overself reveals itself as our true nature — pure, unchanging, blissful awareness."' data-pt='"No silêncio da meditação profunda, o Eu Superior revela-se como nossa verdadeira natureza — consciência pura, imutável e bem-aventurada."'>"In the silence of deep meditation, the Overself reveals itself as our true nature — pure, unchanging, blissful awareness."</p>
+              <cite>— Paul Brunton, The Notebooks</cite>
+            </blockquote>
+          </div>
+        </div>
+        <div class="about-text rv" style="transition-delay:.15s">
+          <h3 data-en="A Skeptic Who Found Wisdom" data-pt="Um Cético Que Encontrou a Sabedoria">A Skeptic Who Found Wisdom</h3>
+          <p data-en="Paul Brunton was born in London in 1898 and began his spiritual journey as a journalist — skeptical, questioning, and determined to separate genuine wisdom from superstition. His travels to India in the 1930s changed everything." data-pt="Paul Brunton nasceu em Londres em 1898 e iniciou sua jornada espiritual como jornalista — cético, questionador e determinado a separar a sabedoria genuína da superstição. Suas viagens à Índia na década de 1930 mudaram tudo.">Paul Brunton was born in London in 1898 and began his spiritual journey as a journalist — skeptical, questioning, and determined to separate genuine wisdom from superstition. His travels to India in the 1930s changed everything.</p>
+          <p data-en="His encounter with Ramana Maharshi at the foot of Arunachala — described in his landmark book 'A Search in Secret India' — is one of the most celebrated meetings of East and West in modern spiritual history. PB described it not as a mystical vision but as a direct encounter with the Silence that underlies all thought." data-pt="Seu encontro com Ramana Maharshi ao pé de Arunachala — descrito em seu livro marcante 'Uma Busca na Índia Secreta' — é um dos encontros mais celebrados entre Oriente e Ocidente na história espiritual moderna. PB descreveu não como uma visão mística, mas como um encontro direto com o Silêncio que subjaz a todo pensamento.">His encounter with Ramana Maharshi at the foot of Arunachala — described in his landmark book 'A Search in Secret India' — is one of the most celebrated meetings of East and West in modern spiritual history.</p>
+          <h3 data-en="The Philosophy of the Overself" data-pt="A Filosofia do Eu Superior">The Philosophy of the Overself</h3>
+          <p data-en="PB developed a comprehensive system of philosophy he called the 'Philosophy of the Overself' — a synthesis of Western reason and Eastern mysticism, grounded in direct experience rather than belief. His 16-volume Notebooks, published posthumously, represent the mature fruit of five decades of inquiry." data-pt="PB desenvolveu um sistema abrangente de filosofia que chamou de 'Filosofia do Eu Superior' — uma síntese da razão ocidental e do misticismo oriental, fundamentada na experiência direta em vez da crença. Seus 16 volumes de Cadernos, publicados postumamente, representam o fruto maduro de cinco décadas de investigação.">PB developed a comprehensive system of philosophy he called the 'Philosophy of the Overself' — a synthesis of Western reason and Eastern mysticism.</p>
+          <p data-en="Unlike many spiritual teachers, PB wrote for the educated, skeptical modern mind. He rejected dogma, demanded rational examination, and insisted that genuine spiritual experience was available to any sincere seeker — regardless of religion, nationality, or tradition." data-pt="Ao contrário de muitos professores espirituais, PB escreveu para a mente moderna educada e cética. Ele rejeitou o dogma, exigiu exame racional e insistiu que a genuína experiência espiritual estava disponível para qualquer buscador sincero.">Unlike many spiritual teachers, PB wrote for the educated, skeptical modern mind. He rejected dogma, demanded rational examination, and insisted that genuine spiritual experience was available to any sincere seeker.</p>
+          <h3 data-en="His India Connection" data-pt="Sua Conexão com a Índia">His India Connection</h3>
+          <p data-en="India was not merely a destination for PB — it was the crucible of his transformation. He visited multiple times, studied classical Sanskrit texts under V. Subramanya Iyer in Mysore, meditated at Arunachala, and received the endorsement of both Ramana Maharshi and the Shankaracharya of Kanchipuram." data-pt="A Índia não era apenas um destino para PB — era o cadinho de sua transformação. Ele visitou várias vezes, estudou textos clássicos em sânscrito sob V. Subramanya Iyer em Mysore, meditou em Arunachala e recebeu o endosso de Ramana Maharshi e do Shankaracharya de Kanchipuram.">India was not merely a destination for PB — it was the crucible of his transformation. He visited multiple times, studied classical Sanskrit texts under V. Subramanya Iyer in Mysore.</p>
+
+          <!-- TIMELINE -->
+          <ul class="timeline-list" id="timeline-list"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div id="footer-about"></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: PROJECTS
+═══════════════════════════════════════ -->
+<div class="page" id="page-projects">
+  <section class="projects-hero">
+    <div class="wrap">
+      <div class="eyebrow" data-en="What We Have Built" data-pt="O Que Construímos">What We Have Built</div>
+      <div class="display rv"><span data-en="Projects &amp;" data-pt="Projetos &amp;">Projects &amp;</span><br><em data-en="Completed Work" data-pt="Trabalhos Concluídos">Completed Work</em></div>
+      <p class="body-lg rv" style="max-width:580px;margin-top:1.5rem;transition-delay:.15s;" data-en="Six major initiatives are complete and ready. Each one lays a foundation stone for PB's presence in India." data-pt="Seis iniciativas principais estão concluídas e prontas. Cada uma lança uma pedra fundamental para a presença de PB na Índia.">Six major initiatives are complete and ready. Each one lays a foundation stone for PB's presence in India.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="proj-full-grid" id="proj-full-grid"></div>
+    </div>
+  </section>
+  <div id="footer-projects"></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: BOOKS
+═══════════════════════════════════════ -->
+<div class="page" id="page-books">
+  <section class="books-hero">
+    <div class="wrap">
+      <div class="eyebrow" data-en="The Written Legacy" data-pt="O Legado Escrito">The Written Legacy</div>
+      <div class="display rv"><span data-en="Books by" data-pt="Livros de">Books by</span><br><em data-en="Paul Brunton" data-pt="Paul Brunton">Paul Brunton</em></div>
+      <p class="body-lg rv" style="max-width:600px;margin-top:1.5rem;transition-delay:.15s;" data-en="Over 28 published works spanning travel, philosophy, mysticism, and practical meditation — forming the most accessible bridge between Eastern wisdom and the Western mind." data-pt="Mais de 28 obras publicadas abrangendo viagens, filosofia, misticismo e meditação prática — formando a ponte mais acessível entre a sabedoria oriental e a mente ocidental.">Over 28 published works spanning travel, philosophy, mysticism, and practical meditation.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow" data-en="Essential Reading" data-pt="Leitura Essencial">Essential Reading</div>
+      <h2 class="h2" data-en="Major Works" data-pt="Obras Principais">Major Works</h2></div>
+      <div class="books-grid rv" style="transition-delay:.1s;" id="books-grid"></div>
+
+      <!-- NOTEBOOKS SPECIAL -->
+      <div class="notebooks-block rv" style="transition-delay:.15s;">
+        <div>
+          <div class="eyebrow" data-en="The Magnum Opus" data-pt="A Obra Magna">The Magnum Opus</div>
+          <h2 class="h2" style="margin-bottom:1.2rem;"><em data-en="The Notebooks" data-pt="Os Cadernos">The Notebooks</em></h2>
+          <p class="body-lg" data-en="16 volumes of carefully distilled wisdom — the culmination of PB's five decades of philosophical inquiry. Organized thematically across topics from meditation and ethics to metaphysics and the nature of reality. Published posthumously by the Paul Brunton Philosophic Foundation." data-pt="16 volumes de sabedoria cuidadosamente destilada — a culminação de cinco décadas de investigação filosófica de PB. Organizados tematicamente em tópicos que vão da meditação e ética até a metafísica e a natureza da realidade. Publicados postumamente pela Fundação Filosófica Paul Brunton.">16 volumes of carefully distilled wisdom — the culmination of PB's five decades of philosophical inquiry.</p>
+          <p class="body-sm" style="margin-top:1rem;" data-en="A key objective of PB Foundation India is to make The Notebooks available in Hindi, Tamil, Telugu, Bengali, Marathi, Kannada, Malayalam, and Gujarati — bringing this definitive work to India's spiritual seekers in their mother tongues." data-pt="Um objetivo fundamental da Fundação PB Índia é tornar Os Cadernos disponíveis em hindi, tâmil, telugu, bengali, marathi, kannada, malaiala e gujarati — levando esta obra definitiva aos buscadores espirituais da Índia em suas línguas maternas.">A key objective of PB Foundation India is to make The Notebooks available in 8 Indian languages.</p>
+          <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="https://www.paulbrunton.org" target="_blank" class="btn-primary" data-en="Explore at PB Foundation" data-pt="Explorar na Fundação PB">Explore at PB Foundation</a>
+            <a href="#" class="btn-gold" onclick="showPage('contact');return false;" data-en="Translation Enquiry" data-pt="Consulta de Tradução">Translation Enquiry</a>
+          </div>
+        </div>
+        <div>
+          <div class="nb-visual" id="nb-visual"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div id="footer-books"></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: CONTACT
+═══════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <section class="contact-hero">
+    <div class="wrap">
+      <div class="eyebrow" data-en="We Would Love to Hear From You" data-pt="Adoraríamos Ouvir de Você">We Would Love to Hear From You</div>
+      <div class="display rv"><span data-en="Get in" data-pt="Entre em">Get in</span><br><em data-en="Touch" data-pt="Contato">Touch</em></div>
+      <p class="body-lg rv" style="max-width:560px;margin-top:1.5rem;transition-delay:.15s;" data-en="Whether you are a seeker, scholar, sponsor, or partner — we welcome every connection made in the spirit of PB's philosophy." data-pt="Seja você um buscador, acadêmico, patrocinador ou parceiro — recebemos cada conexão feita no espírito da filosofia de PB.">Whether you are a seeker, scholar, sponsor, or partner — we welcome every connection.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="contact-info rv">
+          <div class="contact-block">
+            <div class="contact-block-label" data-en="General Enquiries" data-pt="Consultas Gerais">General Enquiries</div>
+            <h3 data-en="Write to Us" data-pt="Escreva para Nós">Write to Us</h3>
+            <p><a href="mailto:india@paulbrunton.org">india@paulbrunton.org</a></p>
+          </div>
+          <div class="contact-block">
+            <div class="contact-block-label" data-en="Official Website" data-pt="Site Oficial">Official Website</div>
+            <h3 data-en="PB Foundation Global" data-pt="Fundação PB Global">PB Foundation Global</h3>
+            <p><a href="https://www.paulbrunton.org" target="_blank">www.paulbrunton.org</a></p>
+          </div>
+          <div class="contact-block">
+            <div class="contact-block-label" data-en="Areas of Interest" data-pt="Áreas de Interesse">Areas of Interest</div>
+            <h3 data-en="We Welcome" data-pt="Recebemos">We Welcome</h3>
+            <div style="display:flex;flex-direction:column;gap:.6rem;margin-top:.5rem;">
+              <div id="contact-interests"></div>
+            </div>
+          </div>
+          <div class="contact-block">
+            <div class="contact-block-label" data-en="Foundation Details" data-pt="Detalhes da Fundação">Foundation Details</div>
+            <h3 data-en="PB Foundation India" data-pt="Fundação PB Índia">PB Foundation India</h3>
+            <p style="font-size:.9rem;color:var(--smoke);margin-top:.5rem;" data-en="A Chapter of the Paul Brunton Philosophic Foundation (USA). Registering as a Section 8 Company under Indian law." data-pt="Um Capítulo da Fundação Filosófica Paul Brunton (EUA). Registrando como Empresa Seção 8 sob a lei indiana.">A Chapter of the Paul Brunton Philosophic Foundation (USA). Registering as a Section 8 Company under Indian law.</p>
+          </div>
+        </div>
+        <div class="contact-form-side rv" style="transition-delay:.15s;">
+          <div class="eyebrow" data-en="Send a Message" data-pt="Enviar uma Mensagem">Send a Message</div>
+          <form onsubmit="handleForm(event)" style="margin-top:1.5rem;">
+            <div class="form-group">
+              <label class="form-label" data-en="Your Name" data-pt="Seu Nome">Your Name</label>
+              <input class="form-input" type="text" placeholder="Norman James" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-en="Email Address" data-pt="Endereço de E-mail">Email Address</label>
+              <input class="form-input" type="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-en="Nature of Enquiry" data-pt="Natureza da Consulta">Nature of Enquiry</label>
+              <select class="form-input form-select" id="enquiry-select">
+                <option data-en="General Enquiry" data-pt="Consulta Geral">General Enquiry</option>
+                <option data-en="Partnership / Sponsorship" data-pt="Parceria / Patrocínio">Partnership / Sponsorship</option>
+                <option data-en="Book Translation" data-pt="Tradução de Livro">Book Translation</option>
+                <option data-en="Teacher Training" data-pt="Formação de Professores">Teacher Training</option>
+                <option data-en="Study Group" data-pt="Grupo de Estudo">Study Group</option>
+                <option data-en="Film / Media" data-pt="Filme / Mídia">Film / Media</option>
+                <option data-en="Academic Research" data-pt="Pesquisa Acadêmica">Academic Research</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-en="Your Message" data-pt="Sua Mensagem">Your Message</label>
+              <textarea class="form-input" placeholder="Tell us about yourself and how you would like to connect..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" data-en="Send Message" data-pt="Enviar Mensagem">Send Message</button>
+          </form>
+          <div id="form-success" style="display:none;margin-top:1.5rem;padding:1.5rem;background:var(--black-3);border-left:3px solid var(--gold);">
+            <p style="font-family:var(--ff-serif);font-size:1.1rem;color:var(--gold);" data-en="✦ Thank you — your message has been received. We will be in touch soon." data-pt="✦ Obrigado — sua mensagem foi recebida. Entraremos em contato em breve.">✦ Thank you — your message has been received. We will be in touch soon.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div id="footer-contact"></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     FOOTER TEMPLATE
+═══════════════════════════════════════ -->
+<template id="footer-template">
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo-row">
+            <div class="footer-emblem">PB</div>
+            <div class="footer-name" data-en="PB Foundation India" data-pt="Fundação PB Índia">PB Foundation India</div>
+          </div>
+          <p class="footer-tagline" data-en="A Chapter of the Paul Brunton Philosophic Foundation. Bringing his timeless philosophy back to its sacred source." data-pt="Um Capítulo da Fundação Filosófica Paul Brunton. Trazendo sua filosofia atemporal de volta à sua fonte sagrada.">A Chapter of the Paul Brunton Philosophic Foundation. Bringing his timeless philosophy back to its sacred source.</p>
+          <a href="https://www.paulbrunton.org" target="_blank" class="btn-gold" style="font-size:.5rem;padding:.5rem 1rem;" data-en="Global Foundation ↗" data-pt="Fundação Global ↗">Global Foundation ↗</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Navigate" data-pt="Navegar">Navigate</h4>
+          <ul>
+            <li><a href="#" onclick="showPage('home');return false;" data-en="Home" data-pt="Início">Home</a></li>
+            <li><a href="#" onclick="showPage('about');return false;" data-en="About Paul Brunton" data-pt="Sobre Paul Brunton">About Paul Brunton</a></li>
+            <li><a href="#" onclick="showPage('projects');return false;" data-en="Projects &amp; Work" data-pt="Projetos &amp; Trabalho">Projects &amp; Work</a></li>
+            <li><a href="#" onclick="showPage('books');return false;" data-en="Books" data-pt="Livros">Books</a></li>
+            <li><a href="#" onclick="showPage('contact');return false;" data-en="Contact" data-pt="Contato">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Our Work" data-pt="Nosso Trabalho">Our Work</h4>
+          <ul>
+            <li><a href="#" onclick="showPage('projects');return false;" data-en="Audio Meditation Site" data-pt="Site de Meditação em Áudio">Audio Meditation Site</a></li>
+            <li><a href="#" onclick="showPage('projects');return false;" data-en="Teacher Training" data-pt="Formação de Professores">Teacher Training</a></li>
+            <li><a href="#" onclick="showPage('projects');return false;" data-en="Film Pitch Decks" data-pt="Pitch Decks de Filme">Film Pitch Decks</a></li>
+            <li><a href="#" onclick="showPage('projects');return false;" data-en="Book Translations" data-pt="Traduções de Livros">Book Translations</a></li>
+            <li><a href="#" onclick="showPage('projects');return false;" data-en="Study Groups" data-pt="Grupos de Estudo">Study Groups</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Connect" data-pt="Conectar">Connect</h4>
+          <ul>
+            <li><a href="mailto:india@paulbrunton.org">india@paulbrunton.org</a></li>
+            <li><a href="https://www.paulbrunton.org" target="_blank">paulbrunton.org</a></li>
+            <li><a href="#" onclick="showPage('contact');return false;" data-en="Partner With Us" data-pt="Seja Nosso Parceiro">Partner With Us</a></li>
+            <li><a href="#" onclick="showPage('contact');return false;" data-en="Study Groups" data-pt="Grupos de Estudo">Study Groups</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-credit">
+          <span data-en="Built with" data-pt="Construído com">Built with</span>
+          <span class="heart">♥</span>
+          <span data-en="by" data-pt="por">by</span>
+          <strong style="color:var(--gold);margin-left:.2rem;">Norman James</strong>
+          <span style="color:rgba(255,255,255,.15);margin:0 .5rem;">·</span>
+          <span data-en="For Paul Brunton's Legacy · India · 2026" data-pt="Para o Legado de Paul Brunton · Índia · 2026">For Paul Brunton's Legacy · India · 2026</span>
+        </div>
+        <div class="footer-legal" data-en="© 2026 PB Foundation India. A Chapter of Paul Brunton Philosophic Foundation." data-pt="© 2026 Fundação PB Índia. Um Capítulo da Fundação Filosófica Paul Brunton.">© 2026 PB Foundation India. A Chapter of Paul Brunton Philosophic Foundation.</div>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<script>
+/* ═══════════════════════════════════════
+   DATA
+═══════════════════════════════════════ */
+const D = {
+  why:{
+    en:[
+      {n:"01",t:"Spiritual Birthplace",       p:"Every major turning point in PB's philosophy happened on Indian soil. India is not a new territory — it is the source."},
+      {n:"02",t:"$27B Wellness Market",        p:"India's yoga and meditation tourism industry grows at 15–16% annually. Millions seek exactly what PB offers."},
+      {n:"03",t:"Rational, Non-Dogmatic",      p:"Urban Indian youth are skeptical of ritual-heavy traditions. PB's modern, non-sectarian approach speaks directly to them."},
+      {n:"04",t:"Low-Cost, High-Impact",       p:"Publishing, events, retreats, and digital outreach cost a fraction of US prices — reaching a far larger audience."},
+      {n:"05",t:"Protect PB's Legacy",         p:"An official India presence prevents misrepresentation and ensures PB's teachings are shared authentically."},
+      {n:"06",t:"Complete the Circle",         p:"PB spent his life bridging East and West. A Foundation in India fulfills that vision — wisdom returning home."},
+      {n:"07",t:"Academic Credibility",        p:"Partnerships with Indian philosophy departments, yoga universities, and Vedanta centres give lasting institutional recognition."},
+      {n:"08",t:"Western Pilgrim Hub",         p:"Thousands of Western PB students travel to India each year. The Foundation becomes their official, guided home."}
+    ],
+    pt:[
+      {n:"01",t:"Berço Espiritual",             p:"Cada ponto de virada na filosofia de PB aconteceu em solo indiano. A Índia não é um novo território — é a fonte."},
+      {n:"02",t:"Mercado de $27B",              p:"A indústria de turismo de yoga e meditação na Índia cresce 15–16% ao ano. Milhões buscam exatamente o que PB oferece."},
+      {n:"03",t:"Racional, Não-Dogmático",      p:"A juventude indiana urbana é cética em tradições rituais. A abordagem moderna e não-sectária de PB fala diretamente a eles."},
+      {n:"04",t:"Baixo Custo, Alto Impacto",    p:"Publicações, eventos e divulgação digital custam uma fração dos preços nos EUA — alcançando um público muito maior."},
+      {n:"05",t:"Proteger o Legado de PB",      p:"Uma presença oficial na Índia evita distorções e garante que os ensinamentos de PB sejam compartilhados autenticamente."},
+      {n:"06",t:"Completar o Círculo",           p:"PB dedicou sua vida a unir Oriente e Ocidente. Uma Fundação na Índia cumpre essa visão — a sabedoria retornando ao lar."},
+      {n:"07",t:"Credibilidade Acadêmica",       p:"Parcerias com departamentos de filosofia, universidades de yoga e centros Vedanta conferem reconhecimento institucional duradouro."},
+      {n:"08",t:"Centro para Peregrinos",        p:"Milhares de estudantes ocidentais de PB viajam à Índia anualmente. A Fundação torna-se seu lar oficial e orientado."}
+    ]
+  },
+  projects:{
+    en:[
+      {icon:"🎧",tag:"Live Platform",    t:"PB Audio Meditation Website",                  p:"A complete digital platform bringing PB's meditation teachings to every seeker in India — accessible on any smartphone in multiple languages.",status:"live"},
+      {icon:"🎓",tag:"Training Platform",t:"Meditation Teacher Training Website",           p:"A full teacher training platform built on PB's authentic teachings — creating a self-growing network of certified teachers across India.",status:"live"},
+      {icon:"🎬",tag:"Film Pitch × 2",  t:"'A Search in Secret India' — Movie Pitch Decks",p:"Two professional pitch decks for bringing PB's remarkable India journey to the global screen — tapping a $4.3 trillion wellness audience.",status:"complete"},
+      {icon:"📚",tag:"Publishing",       t:"Translation into 8 Indian Languages",           p:"PB's 16-volume Notebooks translated into Hindi, Tamil, Telugu, Bengali, Marathi, Kannada, Malayalam, and Gujarati.",status:"in-progress"},
+      {icon:"🏛",tag:"Partnerships",    t:"Indian Institutional Outreach",                  p:"Active dialogue with yoga universities, Ramana Ashram, Motilal Banarsidass, and government cultural bodies for formal collaboration.",status:"in-progress"},
+      {icon:"🔬",tag:"Research",         t:"India Market Research Report",                  p:"Comprehensive research covering the $27B wellness market, demographics, site preservation, and full strategic proposal for the US Foundation.",status:"complete"}
+    ],
+    pt:[
+      {icon:"🎧",tag:"Plataforma Online",   t:"Site de Meditação em Áudio PB",                  p:"Uma plataforma digital completa levando os ensinamentos de meditação de PB a cada buscador na Índia — acessível em qualquer smartphone.",status:"live"},
+      {icon:"🎓",tag:"Plataforma de Treino",t:"Site de Formação de Professores de Meditação",    p:"Uma plataforma completa de formação baseada nos ensinamentos autênticos de PB — criando uma rede crescente de professores certificados.",status:"live"},
+      {icon:"🎬",tag:"Pitch de Filme × 2",  t:"'Uma Busca na Índia Secreta' — Pitch Decks",      p:"Dois decks profissionais para levar a notável jornada indiana de PB às telas globais — aproveitando um mercado de $4,3 trilhões.",status:"complete"},
+      {icon:"📚",tag:"Publicação",           t:"Tradução para 8 Idiomas Indianos",               p:"Os 16 volumes dos Cadernos de PB traduzidos para hindi, tâmil, telugu, bengali, marathi, kannada, malaiala e gujarati.",status:"in-progress"},
+      {icon:"🏛",tag:"Parcerias",            t:"Alcance Institucional Indiano",                   p:"Diálogo ativo com universidades de yoga, Ashram Ramana, Motilal Banarsidass e órgãos culturais governamentais para acordos formais.",status:"in-progress"},
+      {icon:"🔬",tag:"Pesquisa",             t:"Relatório de Pesquisa do Mercado Indiano",        p:"Pesquisa abrangente sobre o mercado de $27B, demografia, preservação de sítios e proposta estratégica completa para o conselho dos EUA.",status:"complete"}
+    ]
+  },
+  market:{
+    en:[
+      {v:"$27B",    d:"Yoga & meditation tourism industry in India"},
+      {v:"1.4B",    d:"Population — world's largest spiritual community"},
+      {v:"500M+",   d:"Smartphone users ready for digital spiritual content"},
+      {v:"32M",     d:"Indian diaspora worldwide — global distribution network"},
+      {v:"15–16%",  d:"Annual growth in India's spiritual tourism sector"},
+      {v:"60%",     d:"Of all domestic travel in India is spiritual tourism"},
+      {v:"$4.3T",   d:"Global wellness market — PB's film connects directly"},
+      {v:"8",       d:"Indian languages targeted for PB book translations"},
+      {v:"5–10×",   d:"More impact per dollar in India vs US operations"},
+      {v:"16+",     d:"Notebook volumes to be made available in India for first time"}
+    ],
+    pt:[
+      {v:"$27B",    d:"Indústria de turismo de yoga e meditação na Índia"},
+      {v:"1,4B",    d:"População — maior comunidade espiritual do mundo"},
+      {v:"500M+",   d:"Usuários de smartphones prontos para conteúdo espiritual digital"},
+      {v:"32M",     d:"Diáspora indiana no mundo — rede global de distribuição"},
+      {v:"15–16%",  d:"Crescimento anual no turismo espiritual da Índia"},
+      {v:"60%",     d:"De todas as viagens domésticas na Índia é turismo espiritual"},
+      {v:"$4,3T",   d:"Mercado global de bem-estar — o filme de PB se conecta diretamente"},
+      {v:"8",       d:"Idiomas indianos visados para traduções dos livros de PB"},
+      {v:"5–10×",   d:"Mais impacto por dólar na Índia vs operações nos EUA"},
+      {v:"16+",     d:"Volumes de Cadernos a serem disponibilizados na Índia pela primeira vez"}
+    ]
+  },
+  roadmap:{
+    en:[
+      {b:"Phase 1 · Months 1–6", t:"Foundation & Launch",
+       items:["Register PB Foundation India as Section 8 Company","Sign affiliation agreement with US Foundation","Launch PB Audio Meditation website publicly","Establish first study group in Delhi or Mumbai","Begin partnership talks with Ramana Ashram","Initiate first Hindi translation of PB Notebooks"]},
+      {b:"Phase 2 · Months 7–14",t:"Build & Activate",
+       items:["Launch Teacher Training website, enrol first cohort","Host inaugural PB India silent meditation retreat","Expand study groups to Chennai and Bengaluru","Submit film pitch decks to producers","Academic outreach to philosophy departments","Complete first Hindi translation, publish affordably"]},
+      {b:"Phase 3 · Months 15–24",t:"Scale & Grow",
+       items:["Study groups in 6+ Indian cities","Host first Annual PB India Conference","Launch Tamil and Telugu translations","PB Heritage Site stewardship in Tiruvannamalai","Formal collaboration with yoga university partner","Annual pilgrimage programme for Western students"]}
+    ],
+    pt:[
+      {b:"Fase 1 · Meses 1–6",  t:"Fundação & Lançamento",
+       items:["Registrar Fundação PB Índia como Empresa Seção 8","Assinar acordo de afiliação com a Fundação dos EUA","Lançar publicamente o site de Meditação em Áudio PB","Estabelecer primeiro grupo de estudo em Delhi ou Mumbai","Iniciar conversas de parceria com o Ashram Ramana","Iniciar primeira tradução para o hindi dos Cadernos PB"]},
+      {b:"Fase 2 · Meses 7–14", t:"Construir & Ativar",
+       items:["Lançar site de Formação de Professores, inscrever primeira turma","Sediar retiro inaugural de meditação silenciosa PB Índia","Expandir grupos de estudo para Chennai e Bengaluru","Enviar pitch decks do filme para produtores","Alcance acadêmico aos departamentos de filosofia","Concluir primeira tradução para o hindi, publicar acessivelmente"]},
+      {b:"Fase 3 · Meses 15–24",t:"Escalar & Crescer",
+       items:["Grupos de estudo em 6+ cidades indianas","Sediar o primeiro Congresso Anual PB Índia","Lançar traduções em tâmil e telugu","Gestão do Sítio Patrimônio PB em Tiruvannamalai","Colaboração formal com universidade parceira de yoga","Programa anual de peregrinação para estudantes ocidentais"]}
+    ]
+  },
+  governance:{
+    en:[
+      {t:"Board of Trustees",    p:"Overall governance & US Foundation liaison"},
+      {t:"Advisory Council",     p:"Indian scholars, spiritual leaders & domain experts"},
+      {t:"Executive Director",   p:"Day-to-day operations & programme delivery"},
+      {t:"US Foundation Liaison",p:"Alignment coordinator between both foundations"}
+    ],
+    pt:[
+      {t:"Conselho de Curadores",    p:"Governança geral e ligação com Fundação dos EUA"},
+      {t:"Conselho Consultivo",      p:"Acadêmicos indianos, líderes espirituais e especialistas"},
+      {t:"Diretor Executivo",        p:"Operações do dia a dia e entrega de programas"},
+      {t:"Liaison da Fundação EUA",  p:"Coordenador de alinhamento entre ambas as fundações"}
+    ]
+  },
+  timeline:{
+    en:[
+      {e:"1898",        t:"Born in London",         p:"Paul Brunton (born Raphael Hurst) begins life in London. His early years are marked by wide reading and an unusual fascination with Eastern mysticism."},
+      {e:"1930s",       t:"Arrives in India",        p:"Travels to India as a skeptical journalist. Visits yogis, fakirs, and sages across the subcontinent — recording his findings in what would become 'A Search in Secret India'."},
+      {e:"Tiruvannamalai",t:"Meets Ramana Maharshi",p:"At Arunachala, his encounter with the silent sage Ramana Maharshi transforms his understanding of consciousness. This meeting becomes the cornerstone of his philosophy."},
+      {e:"Mysore",      t:"Classical Studies",      p:"Studies Ashtavakra Samhita and other Sanskrit texts under V. Subramanya Iyer — developing the philosophical foundations that would become The Notebooks."},
+      {e:"1934–1950s",  t:"Major Works Published",  p:"'A Search in Secret India', 'The Secret Path', 'The Hidden Teaching Beyond Yoga', 'The Wisdom of the Overself' — his work reaches hundreds of thousands globally."},
+      {e:"1981",        t:"Passes in Switzerland",  p:"PB passes peacefully in Vevey, Switzerland, leaving behind 28 published works and the notebooks that would become his 16-volume posthumous masterwork."}
+    ],
+    pt:[
+      {e:"1898",          t:"Nasce em Londres",        p:"Paul Brunton (nascido Raphael Hurst) começa a vida em Londres. Seus primeiros anos são marcados por vasta leitura e fascínio incomum pelo misticismo oriental."},
+      {e:"Anos 1930",     t:"Chega à Índia",           p:"Viaja à Índia como jornalista cético. Visita yogis, fakires e sábios por todo o subcontinente — registrando suas descobertas no que se tornaria 'Uma Busca na Índia Secreta'."},
+      {e:"Tiruvannamalai",t:"Encontra Ramana Maharshi",p:"Em Arunachala, seu encontro com o sábio silencioso Ramana Maharshi transforma sua compreensão da consciência. Este encontro torna-se a pedra angular de sua filosofia."},
+      {e:"Mysore",        t:"Estudos Clássicos",       p:"Estuda Ashtavakra Samhita e outros textos em sânscrito sob V. Subramanya Iyer — desenvolvendo as bases filosóficas que se tornariam Os Cadernos."},
+      {e:"1934–1950s",    t:"Obras Principais Publicadas",p:"'Uma Busca na Índia Secreta', 'O Caminho Secreto', 'O Ensinamento Oculto Além do Yoga', 'A Sabedoria do Eu Superior' — sua obra alcança centenas de milhares globalmente."},
+      {e:"1981",          t:"Parte na Suíça",          p:"PB parte serenamente em Vevey, Suíça, deixando 28 obras publicadas e os cadernos que se tornariam sua obra-prima póstuma de 16 volumes."}
+    ]
+  },
+  books:{
+    en:[
+      {bi:"🔍",t:"A Search in Secret India",         y:"1934",p:"The breakthrough work that introduced Ramana Maharshi and India's sages to the Western world. One of the most influential spiritual travel books ever written."},
+      {bi:"🧘",t:"The Secret Path",                  y:"1935",p:"A practical guide to meditation and self-enquiry. The book that gave hundreds of thousands their first introduction to Eastern mystical practice."},
+      {bi:"🌙",t:"A Search in Secret Egypt",          y:"1936",p:"PB's investigation into ancient Egyptian mysticism and initiation rites — finding surprising parallels with India's wisdom traditions."},
+      {bi:"💡",t:"The Hidden Teaching Beyond Yoga",   y:"1941",p:"A rigorous philosophical work examining the limits of yoga and pointing toward the direct inquiry into consciousness that marks PB's mature philosophy."},
+      {bi:"✨",t:"The Wisdom of the Overself",        y:"1943",p:"PB's most complete philosophical statement — exploring the nature of the Overself, consciousness, time, death, and the path to enlightenment."},
+      {bi:"🌿",t:"The Spiritual Crisis of Man",       y:"1952",p:"A visionary work examining the crisis of modern civilisation and the spiritual renewal PB believed was both necessary and possible."},
+      {bi:"📖",t:"Discover Yourself",                y:"1939",p:"An accessible introduction to self-enquiry, written for the general reader encountering Eastern philosophy for the first time."},
+      {bi:"🕯",t:"The Inner Reality",                y:"1939",p:"A practical guide to the spiritual life — covering meditation, prayer, ethics, and the cultivation of the inner silence that PB considered the foundation of all wisdom."}
+    ],
+    pt:[
+      {bi:"🔍",t:"Uma Busca na Índia Secreta",        y:"1934",p:"A obra inovadora que apresentou Ramana Maharshi e os sábios da Índia ao mundo ocidental. Um dos livros de viagem espiritual mais influentes já escritos."},
+      {bi:"🧘",t:"O Caminho Secreto",                y:"1935",p:"Um guia prático de meditação e auto-investigação. O livro que deu a centenas de milhares sua primeira introdução à prática mística oriental."},
+      {bi:"🌙",t:"Uma Busca no Egito Secreto",        y:"1936",p:"A investigação de PB sobre o misticismo egípcio antigo e os ritos de iniciação — encontrando paralelos surpreendentes com as tradições de sabedoria da Índia."},
+      {bi:"💡",t:"O Ensinamento Oculto Além do Yoga", y:"1941",p:"Uma obra filosófica rigorosa examinando os limites do yoga e apontando para a investigação direta da consciência que marca a filosofia madura de PB."},
+      {bi:"✨",t:"A Sabedoria do Eu Superior",        y:"1943",p:"A declaração filosófica mais completa de PB — explorando a natureza do Eu Superior, consciência, tempo, morte e o caminho para a iluminação."},
+      {bi:"🌿",t:"A Crise Espiritual do Homem",       y:"1952",p:"Uma obra visionária examinando a crise da civilização moderna e a renovação espiritual que PB acreditava ser necessária e possível."},
+      {bi:"📖",t:"Descubra-se a Si Mesmo",            y:"1939",p:"Uma introdução acessível à auto-investigação, escrita para o leitor geral que encontra a filosofia oriental pela primeira vez."},
+      {bi:"🕯",t:"A Realidade Interior",              y:"1939",p:"Um guia prático para a vida espiritual — cobrindo meditação, oração, ética e o cultivo do silêncio interior que PB considerava a base de toda sabedoria."}
+    ]
+  },
+  contacts:{
+    en:["Spiritual seekers & practitioners","Academic researchers & scholars","Sponsors & philanthropists","Yoga & meditation institutions","Publishers & translators","Film & documentary producers","Study group organisers","Retreat & ashram partners"],
+    pt:["Buscadores espirituais e praticantes","Pesquisadores e acadêmicos","Patrocinadores e filantropos","Instituições de yoga e meditação","Editoras e tradutores","Produtores de filmes e documentários","Organizadores de grupos de estudo","Parceiros de retiros e ashrams"]
+  }
+};
+
+/* ═══════════════════════════════════════
+   LANGUAGE
+═══════════════════════════════════════ */
+let lang = 'en';
+
+function toggleLang(){
+  lang = lang === 'en' ? 'pt' : 'en';
+  applyLang();
+}
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const v = el.getAttribute('data-' + lang);
+    if(v) el.innerHTML = v;
+  });
+  const ltEn = document.querySelector('.lt-en');
+  const ltPt = document.querySelector('.lt-pt');
+  if(ltEn) ltEn.style.color = lang==='en' ? 'var(--gold)' : 'var(--smoke)';
+  if(ltPt) ltPt.style.color = lang==='pt' ? 'var(--gold)' : 'var(--smoke)';
+  renderAll();
+  setTimeout(observeReveals, 60);
+}
+
+/* ═══════════════════════════════════════
+   RENDER FUNCTIONS
+═══════════════════════════════════════ */
+function renderAll(){
+  renderWhy(); renderProjHome(); renderProjFull();
+  renderMarket(); renderRoadmap(); renderGovernance();
+  renderTimeline(); renderBooks(); renderContacts();
+  renderNbVisual();
+}
+
+function renderWhy(){
+  const el = document.getElementById('why-grid');
+  if(!el) return;
+  el.innerHTML = D.why[lang].map((c,i) => `
+    <div class="why-card rv" style="transition-delay:${i*.05}s">
+      <div class="why-num">${c.n}</div>
+      <h3>${c.t}</h3>
+      <p>${c.p}</p>
+    </div>`).join('');
+}
+
+function renderProjHome(){
+  const el = document.getElementById('proj-home-grid');
+  if(!el) return;
+  el.innerHTML = D.projects[lang].map((p,i) => `
+    <div class="proj-card rv" style="transition-delay:${i*.07}s">
+      <span class="proj-icon">${p.icon}</span>
+      <span class="proj-tag">${p.tag}</span>
+      <h3>${p.t}</h3>
+      <p>${p.p}</p>
+    </div>`).join('');
+}
+
+function renderProjFull(){
+  const el = document.getElementById('proj-full-grid');
+  if(!el) return;
+  const statusMap = {live:{dot:'',l:{en:'Live',pt:'Ao Vivo'}},complete:{dot:'gold',l:{en:'Complete',pt:'Concluído'}},'in-progress':{dot:'gray',l:{en:'In Progress',pt:'Em Andamento'}}};
+  el.innerHTML = D.projects[lang].map((p,i) => {
+    const sm = statusMap[p.status]||statusMap.complete;
+    return `<div class="proj-full-card rv" style="transition-delay:${i*.07}s">
+      <div class="pfcard-top">
+        <span class="pfcard-icon">${p.icon}</span>
+        <span class="pfcard-tag">${p.tag}</span>
+        <div class="pfcard-title">${p.t}</div>
+      </div>
+      <div class="pfcard-bottom">
+        <p>${p.p}</p>
+        <div class="pfcard-status">
+          <div class="status-dot ${sm.dot}"></div>
+          <span class="status-txt">${sm.l[lang]}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderMarket(){
+  const el = document.getElementById('market-grid');
+  if(!el) return;
+  el.innerHTML = D.market[lang].map((m,i) => `
+    <div class="mcard rv" style="transition-delay:${i*.04}s">
+      <div class="mval">${m.v}</div>
+      <div class="mdesc">${m.d}</div>
+    </div>`).join('');
+}
+
+function renderRoadmap(){
+  const el = document.getElementById('road-grid');
+  if(!el) return;
+  el.innerHTML = D.roadmap[lang].map((ph,i) => `
+    <div class="phase rv" style="transition-delay:${i*.12}s">
+      <div class="phase-num">0${i+1}</div>
+      <div class="phase-badge">${ph.b}</div>
+      <h3>${ph.t}</h3>
+      <ul>${ph.items.map(it => `<li>${it}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+function renderGovernance(){
+  const el = document.getElementById('gov-roles');
+  if(!el) return;
+  el.innerHTML = D.governance[lang].map(r => `
+    <div class="gov-role">
+      <h4>${r.t}</h4>
+      <p>${r.p}</p>
+    </div>`).join('');
+}
+
+function renderTimeline(){
+  const el = document.getElementById('timeline-list');
+  if(!el) return;
+  el.innerHTML = D.timeline[lang].map((it,i) => `
+    <li class="tl-item rv" style="transition-delay:${i*.08}s">
+      <div class="tl-era">${it.e}</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h4>${it.t}</h4><p>${it.p}</p></div>
+    </li>`).join('');
+}
+
+function renderBooks(){
+  const el = document.getElementById('books-grid');
+  if(!el) return;
+  el.innerHTML = D.books[lang].map((b,i) => `
+    <div class="book-card rv" style="transition-delay:${i*.06}s">
+      <div class="book-cover">
+        <div class="book-cover-inner">
+          <span class="bi">${b.bi}</span>
+          <div class="book-cover-title">${b.t}</div>
+          <div class="book-cover-year">${b.y}</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <h3>${b.t}</h3>
+        <p>${b.p}</p>
+      </div>
+    </div>`).join('');
+}
+
+function renderNbVisual(){
+  const el = document.getElementById('nb-visual');
+  if(!el) return;
+  el.innerHTML = Array.from({length:16},(_,i) => `
+    <div class="nb-vol"><span>V${i+1}</span></div>`).join('');
+}
+
+function renderContacts(){
+  const el = document.getElementById('contact-interests');
+  if(!el) return;
+  el.innerHTML = D.contacts[lang].map(c => `
+    <div style="display:flex;align-items:center;gap:.6rem;">
+      <div style="width:4px;height:4px;border-radius:50%;background:var(--red);flex-shrink:0;"></div>
+      <span style="font-family:var(--ff-body);font-size:.95rem;color:var(--mist);">${c}</span>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════
+   PAGE ROUTING
+═══════════════════════════════════════ */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + id);
+  if(target){
+    target.classList.add('active');
+    // Inject footer if not present
+    const fid = 'footer-' + id;
+    const fslot = document.getElementById(fid);
+    if(fslot && !fslot.children.length){
+      const tmpl = document.getElementById('footer-template');
+      fslot.appendChild(tmpl.content.cloneNode(true));
+      applyLang(); // apply translations to new footer
+    }
+  }
+  window.scrollTo({top:0,behavior:'instant'});
+  // Update nav active state
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('data-page') === id);
+  });
+  setTimeout(() => { observeReveals(); }, 60);
+}
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+function observeReveals(){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
+    });
+  }, {threshold:.08, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv:not(.on)').forEach(el => io.observe(el));
+}
+
+/* ═══════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════ */
+const dot=document.getElementById('cd'), ring=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function animC(){
+  rx+=(mx-rx)*.11; ry+=(my-ry)*.11;
+  dot.style.transform  = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+  ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+  requestAnimationFrame(animC);
+})();
+document.addEventListener('mousedown', () => { ring.style.width='20px'; ring.style.height='20px'; ring.style.opacity='1'; });
+document.addEventListener('mouseup',   () => { ring.style.width='30px'; ring.style.height='30px'; ring.style.opacity='.5'; });
+
+/* ═══════════════════════════════════════
+   NAV SCROLL
+═══════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+}, {passive:true});
+
+/* ═══════════════════════════════════════
+   FORM
+═══════════════════════════════════════ */
+function handleForm(e){
+  e.preventDefault();
+  document.getElementById('form-success').style.display = 'block';
+  e.target.style.opacity = '.4';
+  e.target.style.pointerEvents = 'none';
+}
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+// Inject footer for home on load
+(function(){
+  const fslot = document.getElementById('footer-home');
+  const tmpl  = document.getElementById('footer-template');
+  if(fslot) fslot.appendChild(tmpl.content.cloneNode(true));
+})();
+
+renderAll();
+applyLang();
+observeReveals();
+
+// Set initial nav active
+document.querySelector('[data-page="home"]')?.classList.add('active');
+document.querySelector('.lt-en').style.color = 'var(--gold)';
+document.querySelector('.lt-pt').style.color = 'var(--smoke)';
+
+// Re-observe on any scroll
+window.addEventListener('scroll', () => observeReveals(), {passive:true});
+</script>
+</body>
+</html>
